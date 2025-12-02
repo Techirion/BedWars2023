@@ -29,6 +29,7 @@ import com.tomkeuper.bedwars.commands.bedwars.MainCommand;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.npc.skin.SkinnableEntity;
+import net.citizensnpcs.trait.SkinTrait;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -110,7 +111,10 @@ public class JoinNPC {
         if (!npc.isSpawned()) {
             npc.spawn(l);
         }
-        if (npc.getEntity() instanceof SkinnableEntity) ((SkinnableEntity) npc.getEntity()).setSkinName(skin);
+        if (npc.getEntity() instanceof SkinnableEntity){
+            //((SkinnableEntity) npc.getEntity()).setSkinName(skin);
+            npc.getOrAddTrait(SkinTrait.class).setSkinName(skin);
+        }
         npc.setProtected(true);
         npc.setName("");
         String separator = "\\\\n";
