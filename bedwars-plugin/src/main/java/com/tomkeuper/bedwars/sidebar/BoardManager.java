@@ -62,11 +62,11 @@ public class BoardManager implements IScoreboardService {
     private static NameTagManager nameTagManager;
     @Getter
     private static BoardManager instance;
-    private final HashMap<TabPlayer, Integer> tabPlayersPrefix = new HashMap<>();
-    private final HashMap<TabPlayer, Integer> tabPlayersSuffix = new HashMap<>();
-    private final HashMap<TabPlayer, Integer> headPlayersPrefix = new HashMap<>();
-    private final HashMap<TabPlayer, Integer> headPlayersSuffix = new HashMap<>();
-    private final HashMap<TabPlayer, Integer> tabPlayersTitle = new HashMap<>();
+    private final WeakHashMap<TabPlayer, Integer> tabPlayersPrefix = new WeakHashMap<>();
+    private final WeakHashMap<TabPlayer, Integer> tabPlayersSuffix = new WeakHashMap<>();
+    private final WeakHashMap<TabPlayer, Integer> headPlayersPrefix = new WeakHashMap<>();
+    private final WeakHashMap<TabPlayer, Integer> headPlayersSuffix = new WeakHashMap<>();
+    private final WeakHashMap<TabPlayer, Integer> tabPlayersTitle = new WeakHashMap<>();
 
     public final Map<UUID, TabPlayer> tabPlayerCache = new ConcurrentHashMap<>();
 
@@ -589,7 +589,7 @@ public class BoardManager implements IScoreboardService {
     }
 
     @NotNull
-    private String getString(TabPlayer tabPlayer, int currentIndex, List<String> fixList, HashMap<TabPlayer, Integer> tabPlayersPrefix) {
+    private String getString(TabPlayer tabPlayer, int currentIndex, List<String> fixList, WeakHashMap<TabPlayer, Integer> tabPlayersPrefix) {
         String prefix;
         if (currentIndex + 1 >= fixList.size()) {
             tabPlayersPrefix.put(tabPlayer, 0);
