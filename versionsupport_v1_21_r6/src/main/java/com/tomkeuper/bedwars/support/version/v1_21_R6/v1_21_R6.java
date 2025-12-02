@@ -932,16 +932,16 @@ public final class v1_21_R6 extends VersionSupport {
     public static PacketPlayOutSpawnEntity newPacketPlayOutSpawnEntity(net.minecraft.world.entity.Entity nmsEntity) {
         return new PacketPlayOutSpawnEntity(
                 nmsEntity.hashCode(),
-                nmsEntity.cT(),
-                nmsEntity.dK(),
-                nmsEntity.dQ(),
-                nmsEntity.dY(),
-                nmsEntity.dZ(),
+                nmsEntity.cT(), // Entity#getUUID()
+                nmsEntity.dK(), // Entity#getX()
+                nmsEntity.dQ(), // Entity#getZ()
+                nmsEntity.dM(), // Entity#getY()
+                nmsEntity.dZ(), // Entity#getXRot()
                 nmsEntity.getBukkitYaw(),
-                nmsEntity.ax(),
+                nmsEntity.ax(), // Entity#getType()
                 0,
-                nmsEntity.dI(),
-                nmsEntity.cE()
+                nmsEntity.dI(), // Entity#getDeltaMovement()
+                nmsEntity.cN() // Entity#getYHeadRot()
         );
     }
 }

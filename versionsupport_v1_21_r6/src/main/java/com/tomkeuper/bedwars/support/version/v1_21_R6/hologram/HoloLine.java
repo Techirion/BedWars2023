@@ -54,15 +54,15 @@ public class HoloLine implements IHoloLine {
         entity.l(true); // setInvisible
         entity.ar = true; // noPhysics
         Location loc = hologram.getLocation();
-        entity.o(loc.getX(), loc.getY() + hologram.size() * hologram.getGap(), loc.getZ()); // setPosRaw
+        entity.n(loc.getX(), loc.getY() + hologram.size() * hologram.getGap(), loc.getZ()); // setPosRaw
 
         PacketPlayOutSpawnEntity packet = v1_21_R6.newPacketPlayOutSpawnEntity(entity);
-        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // getId(), getEntityData()
+        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // Entity#getId(), Entity#getEntityData()
 
         final var delta = new Vec3D(0,0,0);
-        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dY()); // trackingPosition(), , , getXRot()
+        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dZ()); // Entity#trackingPosition(), , , Entity#getXRot()
         final Set<Relative> set = new HashSet<>();
-        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false);
+        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false); // Entity#getId()
 
         for (var player : hologram.getPlayers()) {
             v1_21_R6.sendPackets(player, packet, metadataPacket, teleportPacket);
@@ -101,17 +101,17 @@ public class HoloLine implements IHoloLine {
 
     @Override
     public void update() {
-        entity.b(CraftChatMessage.fromStringOrNull(text)); // setCustomName
+        entity.b(CraftChatMessage.fromStringOrNull(text)); // Entity#setCustomName()
         int position = hologram.getLines().indexOf(this);
-        entity.o(hologram.getLocation().getX(), hologram.getLocation().getY() + position * hologram.getGap(), hologram.getLocation().getZ()); //
+        entity.o(hologram.getLocation().getX(), hologram.getLocation().getY() + position * hologram.getGap(), hologram.getLocation().getZ()); // LivingEntity#knockback(double arg0, double arg1, double arg2)
         if (isDestroyed()) return;
 
-        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // getId(), getEntityData()
+        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // Entity#getId(), Entity#getEntityData()
 
         final var delta = new Vec3D(0,0,0);
-        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dY()); // trackingPosition(), , , getXRot()
+        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dZ()); // Entity#trackingPosition(), , , Entity#getXRot()
         final Set<Relative> set = new HashSet<>();
-        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false); // getId()
+        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false); // Entity#getId()
 
         for (var player : hologram.getPlayers()) {
             v1_21_R6.sendPackets(player, metadataPacket, teleportPacket);
@@ -120,17 +120,17 @@ public class HoloLine implements IHoloLine {
 
     @Override
     public void update(Player player) {
-        entity.b(CraftChatMessage.fromStringOrNull(text)); // setCustomName
+        entity.b(CraftChatMessage.fromStringOrNull(text)); // Entity#setCustomName()
         int position = hologram.getLines().indexOf(this);
-        entity.o(hologram.getLocation().getX(), hologram.getLocation().getY() + position * hologram.getGap(), hologram.getLocation().getZ()); //
+        entity.o(hologram.getLocation().getX(), hologram.getLocation().getY() + position * hologram.getGap(), hologram.getLocation().getZ()); // LivingEntity#knockback(double arg0, double arg1, double arg2)
         if (isDestroyed()) return;
 
-        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // getId(), getEntityData()
+        PacketPlayOutEntityMetadata metadataPacket = new PacketPlayOutEntityMetadata(entity.az(), entity.aC().c()); // Entity#getId(), Entity#getEntityData()
 
         final var delta = new Vec3D(0,0,0);
-        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dY()); // trackingPosition(), , , getXRot()
+        final var positionMoveRotation = new PositionMoveRotation(entity.dE(), delta, 0, entity.dZ()); // Entity#trackingPosition(), , , Entity#getXRot()
         final Set<Relative> set = new HashSet<>();
-        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false); // getId()
+        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(entity.az(), positionMoveRotation, set, false); // Entity#getId()
 
         v1_21_R6.sendPackets(player, metadataPacket, teleportPacket);
     }
@@ -158,7 +158,7 @@ public class HoloLine implements IHoloLine {
 
     @Override
     public void remove() {
-        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(entity.az());
+        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(entity.az()); // Entity#getId()
         for (var player : hologram.getPlayers()) {
             v1_21_R6.sendPacket(player, packet);
         }
@@ -166,7 +166,7 @@ public class HoloLine implements IHoloLine {
 
     @Override
     public void remove(Player player) {
-        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(entity.az());
+        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(entity.az()); // Entity#getId()
         v1_21_R6.sendPacket(player, packet);
     }
 

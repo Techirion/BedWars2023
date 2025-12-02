@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-import static org.bukkit.craftbukkit.libs.jline.internal.Log.debug;
+import static com.tomkeuper.bedwars.BedWars.debug;
 
 public class HologramTask implements Runnable {
 

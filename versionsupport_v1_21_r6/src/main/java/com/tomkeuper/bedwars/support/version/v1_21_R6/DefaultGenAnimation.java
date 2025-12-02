@@ -76,14 +76,14 @@ public class DefaultGenAnimation implements IGeneratorAnimation {
         setArmorStandYAW(sinusoidalYaw);
         addArmorStandMotY(sinusoidalMotY);
 
-        armorStand.n(loc.getX(), loc.getY(), loc.getZ()); // SETTING NEW LOCATION
-        armorStand.bc = false; // SETTING ON GROUND TO FALSE
+        armorStand.n(loc.getX(), loc.getY(), loc.getZ()); // Entity#setPosRaw(double arg0, double arg1, double arg2)
+        armorStand.bc = false; // Entity#onGround
 
         final var delta = new Vec3D(0,0,0);
-        final var positionMoveRotation = new PositionMoveRotation(armorStand.dE(), delta, 0, 0);
+        final var positionMoveRotation = new PositionMoveRotation(armorStand.dE(), delta, 0, 0); // Entity#trackingPosition()
         final Set<Relative> set = new HashSet<>();
 
-        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(armorStand.az(), positionMoveRotation, set, false);
+        PacketPlayOutEntityTeleport teleportPacket = new PacketPlayOutEntityTeleport(armorStand.az(), positionMoveRotation, set, false); // Entity#getId()
 
         PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook moveLookPacket = new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(armorStand.az(), (short) 0, (short) ((getArmorStandMotY() - lastMotY)*128), (short) 0, (byte) getArmorStandYAW(), (byte) 0, false);
 
@@ -94,26 +94,26 @@ public class DefaultGenAnimation implements IGeneratorAnimation {
     }
 
     private void setArmorStandYAW(float yaw) {
-        armorStand.v(yaw);
+        armorStand.v(yaw); // Entity#setYRot(float arg0)
     }
 
     private void addArmorStandYAW(float yaw) {
-        armorStand.v(getArmorStandYAW() + yaw);
+        armorStand.v(getArmorStandYAW() + yaw); // Entity#setYRot(float arg0)
     }
 
     private float getArmorStandYAW() {
-        return armorStand.dP();
+        return armorStand.dX(); // Entity#getYRot()
     }
 
     private void setArmorStandMotY(double y) {
-        armorStand.i(new Vec3D(0, y, 0));
+        armorStand.i(new Vec3D(0, y, 0)); // Entity#push(double arg0, double arg1, double arg2)
     }
 
     private void addArmorStandMotY(double y) {
-        armorStand.i(new Vec3D(0, getArmorStandMotY() + y, 0));
+        armorStand.i(new Vec3D(0, getArmorStandMotY() + y, 0)); // Entity#push(double arg0, double arg1, double arg2)
     }
 
     private double getArmorStandMotY() {
-        return armorStand.ag().h;
+        return armorStand.ag().h; // Entity#getKnownMovement()
     }
 }
