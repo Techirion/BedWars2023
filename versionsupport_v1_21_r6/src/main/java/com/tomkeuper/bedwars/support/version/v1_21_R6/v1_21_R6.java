@@ -934,8 +934,8 @@ public final class v1_21_R6 extends VersionSupport {
                 nmsEntity.hashCode(),
                 nmsEntity.cT(), // Entity#getUUID()
                 nmsEntity.dK(), // Entity#getX()
-                nmsEntity.dQ(), // Entity#getZ()
                 nmsEntity.dM(), // Entity#getY()
+                nmsEntity.dQ(), // Entity#getZ()
                 nmsEntity.dZ(), // Entity#getXRot()
                 nmsEntity.getBukkitYaw(),
                 nmsEntity.ax(), // Entity#getType()
